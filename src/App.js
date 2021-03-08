@@ -29,6 +29,9 @@ function App() {
       ]
   )
 
+  //Hide or show form
+  const[showAddTask, setShowAddTask] = useState(false)
+
   //Add Task
   const addTask = (task) => {
     console.log(task)
@@ -54,8 +57,9 @@ function App() {
 
   return (
     <div className="container">
-      <Header/>
-      <AddTask onAdd={addTask}/>
+      <Header onAdd={() => setShowAddTask(!showAddTask)}
+      showAdd={showAddTask}/>
+      {showAddTask && <AddTask onAdd={addTask}/>}
       {tasks.length > 0 ? <Tasks tasks={tasks}
        onDelete={deleteTask}
        onToggle={toggleReminder}/> : 'No tasks to show'}
